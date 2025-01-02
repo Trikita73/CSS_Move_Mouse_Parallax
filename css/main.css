@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    color-scheme: light dark;
+    --index: calc(1vw + 1vh);
+    --light-color: #f5f5f5;
+    --dark-color: #151515;
+
+}
+
+@font-face {
+    font-family: arsenal_f;
+    src: url(../fonts/arsenal-regular.woff2);
+}
+
+body {
+    font-family: arsenal_f;
+    background-color: light-dark(var(--light-color), var(--dark-color));
+
+}
+
+.magic-list {
+    font-size: calc(var(--index) * 2.75);
+    padding: calc(var(--index) * 2.75);
+}
+
+.magic-list__item {
+    cursor: none;
+}
+
+.magic-list__item:hover .cursor {
+    opacity: 1;
+}
+
+
+.cursor {
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    position: fixed;
+    opacity: 0;
+}
