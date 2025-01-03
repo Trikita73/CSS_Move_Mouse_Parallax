@@ -7,9 +7,17 @@
 :root {
     color-scheme: light dark;
     --index: calc(1vw + 1vh);
+    --transition-cursor: 2s cubic-bezier(.05, .5, 0, 1) ;
+    --transition: 1.25s cubic-bezier(.2, .5, 0, 1);
+
     --light-color: #f5f5f5;
     --dark-color: #151515;
 
+    --light-border: rgb(255 255 255 / .09);
+    --dark-border: rgb(0 0 0 / .09);
+
+    --light-cover: rgb(255 255 255 / .05);
+    --dark-cover: rgb(0 0 0 / .05);
 }
 
 @font-face {
@@ -30,6 +38,17 @@ body {
 
 .magic-list__item {
     cursor: none;
+    color: light-dark(var(--dark-color), var(--light-color));
+    text-decoration: none;
+    display: block;
+    line-height: .9;
+    padding: calc(var(--index) * 3) calc(var(--index)* 7.5);
+    border-bottom: 1px solid light-dark(var(--dark-border), var(--light-border));
+    transition: background-color var(--transition);
+}
+
+.magic-list__item:hover {
+    background-color: light-dark(var(--dark-cover), var(--light-cover));
 }
 
 .magic-list__item:hover .cursor {
@@ -38,9 +57,31 @@ body {
 
 
 .cursor {
-    width: 100px;
-    height: 100px;
+    --width: 100px;
+    --height: 100px;
+    width: var(--width);
+    height: var(--height);
     background-color: #fff;
     position: fixed;
+    opacity: 0; 
+    transform: translate3d(var(--move-x), var(--move-y), 0);
+    top: calc(var(--height) * -.5);
+    left: calc(var(--width) * -.5);
+    transition: transform var(--transition-cursor), opacity 1s ease;
+    will-change: transform;
+    z-index: -1;
+}
+
+.item-bg {
+    position: fixed;
+    inset: 0;
+    background-position: center;
+    background-size: cover;
+    z-index: -2;
     opacity: 0;
+    transition: opacity .5s ease;
+}
+
+.magic-list__item:hover .item-bg {
+    opacity: .1;
 }
